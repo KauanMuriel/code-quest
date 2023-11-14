@@ -8,89 +8,79 @@ namespace CodeQuest
 {
     public class Player
     {
-        public int playerLives = 1;
+        public int PlayerLives { get; set; } = 1; 
 
-        public int[] playerPos = { 0, 0 };
-        public List<int[]> colisionPoints = new List<int[]>();
-        public List<int[]> actionPoints = new List<int[]>();
-        public List<int[]> dangerPoints = new List<int[]>();
-
-        public int getPlayerLives()
-        {
-            return playerLives;
-        }
-
-        public void setPlayerLives(int playerLives)
-        {
-            this.playerLives = playerLives;
-        }
+        public int[] PlayerPos = { 0, 0 };
+        public List<int[]> ColisionPoints = new List<int[]>();
+        public List<int[]> ActionPoints = new List<int[]>();
+        public List<int[]> DangerPoints = new List<int[]>();
 
         public int[] getPlayerPos()
         {
-            return playerPos;
+            return PlayerPos;
         }
 
         public void setPlayerPos(int x, int y)
         {
-            this.playerPos[0] = x;
-            this.playerPos[1] = y;
+            PlayerPos[0] = x;
+            PlayerPos[1] = y;
         }
 
-        public void updatePosition(ConsoleKeyInfo key)
+        public void UpdatePosition(ConsoleKeyInfo key)
         {
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
-                    if (checkColision(playerPos[0] - 1, playerPos[1]))
+                    if (CheckColision(PlayerPos[0] - 1, PlayerPos[1]))
                     {
                         break;
                     }
-                    playerPos[0]--;
+                    PlayerPos[0]--;
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (checkColision(playerPos[0] + 1, playerPos[1]))
+                    if (CheckColision(PlayerPos[0] + 1, PlayerPos[1]))
                     {
                         break;
                     }
-                    playerPos[0]++;
+                    PlayerPos[0]++;
                     break;
 
                 case ConsoleKey.LeftArrow:
-                    if (checkColision(playerPos[0], playerPos[1] - 1))
+                    if (CheckColision(PlayerPos[0], PlayerPos[1] - 1))
                     {
                         break;
                     }
-                    playerPos[1]--;
+                    PlayerPos[1]--;
                     break;
 
                 case ConsoleKey.RightArrow:
-                    if (checkColision(playerPos[0], playerPos[1] + 1))
+                    if (CheckColision(PlayerPos[0], PlayerPos[1] + 1))
                     {
                         break;
                     }
-                    playerPos[1]++;
+                    PlayerPos[1]++;
                     break;
             }
         }
 
-        private bool checkColision(int playerPosX, int playerPosY)
+        private bool CheckColision(int playerPosX, int playerPosY)
         {
-            if (colisionPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
+            if (ColisionPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
             {
                 // COLISAO SIMPLES, PAREDE
                 return true;
             }
-            else if (actionPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
+            else if (ActionPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
             {
                 // COLISAO COM ACAO
-                setPlayerLives(playerLives + 1);
+                PlayerLives++;
                 return true;
             }
-            else if (dangerPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
+            else if (DangerPoints.Any(point => point[0] == playerPosX && point[1] == playerPosY))
             {
                 // COLISAO COM PERIGO
-                setPlayerLives(playerLives - 1);
+                PlayerLives--;
                 return true;
             }
             else
@@ -102,9 +92,9 @@ namespace CodeQuest
 
         public Player(List<int[]> colisionPoints, List<int[]> actionPoints, List<int[]> dangerPoints)
         {
-            this.colisionPoints = colisionPoints;
-            this.actionPoints = actionPoints;
-            this.dangerPoints = dangerPoints;
+            ColisionPoints = colisionPoints;
+            ActionPoints = actionPoints;
+            DangerPoints = dangerPoints;
         }
     }
 }

@@ -8,21 +8,21 @@ namespace CodeQuest
 {
     public class Render
     {
-        private Map map;
-        private Player player;
+        private readonly Map _map;
+        private readonly Player _player;
 
         public void RenderMap()
         {
             Console.Clear();
             Console.CursorVisible = false;
 
-            int[,] mapDesign = map.getMapDesign();
+            int[,] mapDesign = _map.MapDesign;
 
-            Console.WriteLine("Player Lives: " + player.getPlayerLives());
+            Console.WriteLine("Player Lives: " + _player.PlayerLives);
 
-            for (int x = 0; x < map.mapDesignXSize; x++)
+            for (int x = 0; x < _map.MapDesignXSize; x++)
             {
-                for (int y = 0; y < map.mapDesignYSize; y++)
+                for (int y = 0; y < _map.MapDesignYSize; y++)
                 {
                     switch (mapDesign[x, y])
                     {
@@ -36,7 +36,7 @@ namespace CodeQuest
                             Console.Write("|-|");
                             break;
                         default:
-                            if (x == player.playerPos[0] && y == player.playerPos[1])
+                            if (x == _player.PlayerPos[0] && y == _player.PlayerPos[1])
                             {
                                 Console.Write("[0]");
                             }
@@ -53,8 +53,8 @@ namespace CodeQuest
 
         public Render(Map map, Player player)
         {
-            this.map = map;
-            this.player = player;
+            _map = map;
+            _player = player;
         }
     }
 }

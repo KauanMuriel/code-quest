@@ -8,18 +8,18 @@ namespace CodeQuest.Presentation
         static void Main(string[] args)
         {
             var gameMap = new Map();
-            var player = new Player(gameMap.getColisionPoints(), gameMap.getActionPoints(), gameMap.getDangerPoints());
+            var player = new Player(gameMap.colisionPoints, gameMap.actionPoints, gameMap.dangerPoints);
             var gameRender = new Render(gameMap, player);
 
             player.setPlayerPos(9, 5);
-            player.setPlayerLives(3);
+            player.PlayerLives = 3;
             gameRender.RenderMap();
 
             while (true)
             {
                 gameRender.RenderMap();
                 ConsoleKeyInfo key = Console.ReadKey();
-                player.updatePosition(key);
+                player.UpdatePosition(key);
             }
 
         }
