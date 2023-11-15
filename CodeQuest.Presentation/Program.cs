@@ -8,10 +8,10 @@ namespace CodeQuest.Presentation
         static void Main(string[] args)
         {
             var gameMap = new Map();
-            var player = new Player(gameMap.colisionPoints, gameMap.actionPoints, gameMap.dangerPoints);
+            var player = new Player();
             var gameRender = new Render(gameMap, player);
 
-            player.setPlayerPos(9, 5);
+            player.SetPlayerPos(9, 5);
             player.PlayerLives = 3;
             gameRender.RenderMap();
 
@@ -21,7 +21,6 @@ namespace CodeQuest.Presentation
                 ConsoleKeyInfo key = Console.ReadKey();
                 player.UpdatePosition(key);
             }
-
         }
     }
 }

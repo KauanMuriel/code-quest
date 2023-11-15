@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Codequest.Domain.Entities;
+using Codequest.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,10 +28,7 @@ namespace CodeQuest
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, }
         };
 
-        public List<int[]> colisionPoints = new List<int[]>();
-        public List<int[]> dangerPoints = new List<int[]>();
-        public List<int[]> actionPoints = new List<int[]>();
-
+        public static List<TileMap> ColisionPoints { get; private set; } = new List<TileMap>();
 
         public int[] SpawnPoint { get; private set; } = { 0, 0 };
 
@@ -48,18 +47,26 @@ namespace CodeQuest
             {
                 for (int y = 0; y < MapDesignYSize; y++)
                 {
-                    if (MapDesign[x, y] == 1)
+                    var tileType = TileMapType.Void;
+                    
+                    switch (MapDesign[x, y])
                     {
-                        colisionPoints.Add(new int[] { x, y });
+                        case 0:
+                            tileType = TileMapType.Void;
+                            break;
+                        case 1:
+                            tileType = TileMapType.Obstacle;
+                            break;
+                        case 2:
+                            tileType = TileMapType.Heal;
+                            break;
+                        case 3:
+                            tileType = TileMapType.Danger;
+                            break;
                     }
-                    else if (MapDesign[x, y] == 2)
-                    {
-                        actionPoints.Add(new int[] { x, y });
-                    }
-                    else if (MapDesign[x, y] == 3)
-                    {
-                        dangerPoints.Add(new int[] { x, y });
-                    }
+                    var tileMap = new TileMap(x, y, tileType);
+
+                    ColisionPoints.Add(tileMap);
                 }
             }
         }
