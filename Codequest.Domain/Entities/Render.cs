@@ -18,7 +18,7 @@ namespace CodeQuest
 
             int[,] mapDesign = _map.MapDesign;
 
-            Console.WriteLine("Player Lives: " + _player.PlayerLives);
+            Console.WriteLine("Player Lives: " + _player.Lives);
 
             for (int x = 0; x < _map.MapDesignXSize; x++)
             {
@@ -36,7 +36,7 @@ namespace CodeQuest
                             Console.Write("|-|");
                             break;
                         default:
-                            if (x == _player.PlayerPos[0] && y == _player.PlayerPos[1])
+                            if (x == _player.Position[0] && y == _player.Position[1])
                             {
                                 Console.Write("[0]");
                             }

@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Maps\Lobby.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Maps\Lobby.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Codequest.Domain\Codequest.Domain.csproj" />
   </ItemGroup>
 

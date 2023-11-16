@@ -4,18 +4,18 @@ namespace CodeQuest
 {
     public class Player
     {
-        public int PlayerLives { get; set; } = 1; 
-        public int[] PlayerPos = { 0, 0 };
+        public int Lives { get; set; } = 1; 
+        public int[] Position { get; set; } = { 0, 0 };
 
         public int[] GetPlayerPos()
         {
-            return PlayerPos;
+            return Position;
         }
 
         public void SetPlayerPos(int x, int y)
         {
-            PlayerPos[0] = x;
-            PlayerPos[1] = y;
+            Position[0] = x;
+            Position[1] = y;
         }
 
         public void UpdatePosition(ConsoleKeyInfo key)
@@ -23,30 +23,30 @@ namespace CodeQuest
             switch (key.Key)
             {
                 case ConsoleKey.UpArrow:
-                    if (CheckColision(PlayerPos[0] - 1, PlayerPos[1]))
+                    if (CheckColision(Position[0] - 1, Position[1]))
                     {
-                        PlayerPos[0]--;
+                        Position[0]--;
                     }
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (CheckColision(PlayerPos[0] + 1, PlayerPos[1]))
+                    if (CheckColision(Position[0] + 1, Position[1]))
                     {
-                        PlayerPos[0]++;
+                        Position[0]++;
                     }
                     break;
 
                 case ConsoleKey.LeftArrow:
-                    if (CheckColision(PlayerPos[0], PlayerPos[1] - 1))
+                    if (CheckColision(Position[0], Position[1] - 1))
                     {
-                        PlayerPos[1]--;
+                        Position[1]--;
                     }
                     break;
 
                 case ConsoleKey.RightArrow:
-                    if (CheckColision(PlayerPos[0], PlayerPos[1] + 1))
+                    if (CheckColision(Position[0], Position[1] + 1))
                     {
-                        PlayerPos[1]++;
+                        Position[1]++;
                     }
                     break;
             }
@@ -64,10 +64,10 @@ namespace CodeQuest
             switch (colision.Type)
             {
                 case TileMapType.Heal:
-                    PlayerLives++;
+                    Lives++;
                     break;
                 case TileMapType.Danger:
-                    PlayerLives--;
+                    Lives--;
                     break;
             }
 
