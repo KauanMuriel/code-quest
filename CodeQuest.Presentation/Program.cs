@@ -9,12 +9,12 @@ namespace CodeQuest.Presentation
         static void Main(string[] args)
         {
             var gameMap = new Map();
-            var d = Directory.GetCurrentDirectory();
-            gameMap.ChangeMap(LevelMap.Lobby);
+            //gameMap.ChangeMap(LevelMap.Lobby);
+            
             var player = new Player();
             var gameRender = new Render(gameMap, player);
 
-            player.SetPlayerPos(9, 5);
+            player.SetPlayerPos(Map.SpawnPoint.X, Map.SpawnPoint.Y);
             player.Lives = 3;
             gameRender.RenderMap();
 

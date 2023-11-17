@@ -9,71 +9,23 @@ using System.Threading.Tasks;
 namespace CodeQuest
 {
     public class Map
-    {   // 1 parede
-        // 2 action
-        // 3 perigo
-
-        public int[,] MapDesign { get; private set; } =
+    {
+        public static List<TileMap> MapDesign { get; set; } = new List<TileMap>();
+        public static int XSize { get; set;} = 0;
+        public static int YSize { get; set;} = 0;
+        public static TileMap SpawnPoint
         {
-            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 2, 0, 0, 0, 0, 0, 3, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, }
-        };
-
-        public static List<TileMap> ColisionPoints { get; private set; } = new List<TileMap>();
-
-        public int[] SpawnPoint { get; private set; } = { 0, 0 };
-
-        public int MapDesignXSize => MapDesign.GetLength(0);
-        public int MapDesignYSize => MapDesign.GetLength(1);
-
-        public void SetSpawnPoint(int x, int y)
-        {
-            SpawnPoint[0] = x;
-            SpawnPoint[1] = y;
+            get => MapDesign.Find(t => t.Type == TileMapType.SpawnPoint);
         }
 
-        public void SetColisionPoints()
+        public void ChangeMap(LevelMap levelMap)
         {
-            for (int x = 0; x < MapDesignXSize; x++)
-            {
-                for (int y = 0; y < MapDesignYSize; y++)
-                {
-                    var tileType = TileMapType.Void;
-                    
-                    switch (MapDesign[x, y])
-                    {
-                        case 0:
-                            tileType = TileMapType.Void;
-                            break;
-                        case 1:
-                            tileType = TileMapType.Obstacle;
-                            break;
-                        case 2:
-                            tileType = TileMapType.Heal;
-                            break;
-                        case 3:
-                            tileType = TileMapType.Danger;
-                            break;
-                    }
-                    var tileMap = new TileMap(x, y, tileType);
-
-                    ColisionPoints.Add(tileMap);
-                }
-            }
+            
         }
 
         public Map()
         {
-            SetColisionPoints();
+            MapBuilder.SetMapLevel(LevelMap.Lobby); // DEFINIDO O LOB QUANDO O MAPA E GERADO, JOGADOR INICIA NO LOBBY
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Codequest.Domain.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,38 +18,43 @@ namespace CodeQuest
             Console.Clear();
             Console.CursorVisible = false;
 
-            int[,] mapDesign = _map.MapDesign;
-
             Console.WriteLine("Player Lives: " + _player.Lives);
 
-            for (int x = 0; x < _map.MapDesignXSize; x++)
+            foreach (var tile in Map.MapDesign)
             {
-                for (int y = 0; y < _map.MapDesignYSize; y++)
+                int countY = 0;
+                while ((tile.Y + countY++) != Map.YSize)
                 {
-                    switch (mapDesign[x, y])
+                    int countX = 0;
+                    // COLUNA 1
+                    while ((tile.X + countX++) != Map.XSize)
                     {
-                        case 1:
-                            Console.Write(" # ");
-                            break;
-                        case 2:
-                            Console.Write("|+|");
-                            break;
-                        case 3:
-                            Console.Write("|-|");
-                            break;
-                        default:
-                            if (x == _player.Position[0] && y == _player.Position[1])
-                            {
-                                Console.Write("[0]");
-                            }
-                            else
-                            {
-                                Console.Write("   ");
-                            }
-                            break;
+                        // LINHA
+                        switch (tile.Type)
+                        {
+                            case TileMapType.Obstacle:
+                                Console.Write(" # ");
+                                break;
+                            case TileMapType.Heal:
+                                Console.Write("|+|");
+                                break;
+                            case TileMapType.Danger:
+                                Console.Write("|-|");
+                                break;
+                            default:
+                                if (tile.X == _player.Position[0] && tile.Y == _player.Position[1])
+                                {
+                                    Console.Write("[0]");
+                                }
+                                else
+                                {
+                                    Console.Write("   ");
+                                }
+                                break;
+                        }
                     }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
             }
         }
 

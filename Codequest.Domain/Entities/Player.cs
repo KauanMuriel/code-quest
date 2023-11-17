@@ -1,4 +1,5 @@
-﻿using Codequest.Domain.Enums;
+﻿using Codequest.Domain.Entities;
+using Codequest.Domain.Enums;
 
 namespace CodeQuest
 {
@@ -54,7 +55,7 @@ namespace CodeQuest
 
         private bool CheckColision(int playerPosX, int playerPosY)
         {
-            var colision = Map.ColisionPoints.Find(tile => tile.X == playerPosX && tile.Y == playerPosY);
+            var colision = Map.MapDesign.Find(tile => tile.X == playerPosX && tile.Y == playerPosX);
 
             if (colision == null)
             {

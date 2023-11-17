@@ -11,6 +11,7 @@ namespace Codequest.Domain.Enums
         Void,
         Obstacle,
         Danger,
-        Heal
+        Heal,
+        SpawnPoint
     }
 }
